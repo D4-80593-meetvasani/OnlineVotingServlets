@@ -1,5 +1,6 @@
 package com.sunbeam.servlets;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,24 +9,28 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.sunbeam.daos.CandidateDao;
 import com.sunbeam.daos.CandidateDaoImpl;
 import com.sunbeam.pojos.Candidate;
 
-@WebServlet("/candlist")
-public class CandidateListServlet extends HttpServlet {
-	protected void doPost(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp) throws javax.servlet.ServletException ,java.io.IOException {
+@WebServlet("/result")
+public class ResultServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		processRequest(req, resp);
 	}
-	protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp) throws javax.servlet.ServletException ,java.io.IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		processRequest(req, resp);
 	}
-	protected void processRequest(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp) throws javax.servlet.ServletException ,java.io.IOException {
+	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// business logic
 		List<Candidate> list = new ArrayList<>();
 		try(CandidateDao dao = new CandidateDaoImpl()) {
-			list = dao.findAll();
+			list = dao.findAllOrderByVotesDesc();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -36,9 +41,10 @@ public class CandidateListServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<title>Candidates</title>");
+		out.println("<title>Result</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
 		String uname = "";
 		Cookie[] arr = req.getCookies();
 		if(arr != null) {
@@ -48,26 +54,25 @@ public class CandidateListServlet extends HttpServlet {
 					break;
 				}
 			}
-		}
+		}		out.println("<table border='1'>");
 		
-		out.printf("Hello, Voter - %s! <hr/>\n", uname);		out.println("<form method='post' action='vote'>");
+		
+		out.printf("Hello, Admin - %s! <hr/>\n", uname);
+
+		out.println("<thead>");
+		out.println("<th>Id</th>");
+		out.println("<th>Name</th>");
+		out.println("<th>Party</th>");
+		out.println("<th>Votes</th>");
+		out.println("</thead>");
 		for (Candidate c : list)
-			out.printf("<input type='radio' name='candidate' value='%s'/> %s - %s <br/>\n", 
-											c.getId(), c.getName(), c.getParty());
-		out.println("<input type='submit' value='Vote'/>");
+			out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", 
+					c.getId(), c.getName(), c.getParty(), c.getVotes());
+		out.println("</table>");
+
+		out.println("<br/><br/><a href='logout'>Sign Out</a>");
 		out.println("</form>");
 		out.println("</body>");
 		out.println("</html>");
-
 	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,13 @@ public class LoginServlet extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		if(success) {
+			
+			String uname = user.getFirstName() + "_" + user.getLastName();
+			Cookie c = new Cookie("username", uname);
+			c.setMaxAge(3600);
+			resp.addCookie(c);
+
+			
 			if(user.getRole().equals("voter"))
 				resp.sendRedirect("candlist"); // go to next servlet for voter
 			else // user.getRole().equals("admi")

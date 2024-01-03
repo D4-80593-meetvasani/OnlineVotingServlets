@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,14 @@ public class LogoutServlet extends HttpServlet {
 		processRequest(req, resp);
 	}
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		// to destroy the cookie
+		Cookie c = new Cookie("username", "");
+		c.setMaxAge(-1);
+		resp.addCookie(c);
+		
+		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");

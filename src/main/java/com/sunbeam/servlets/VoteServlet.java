@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,20 @@ public class VoteServlet extends HttpServlet {
 		out.println("<title>Voted</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+		String uname = "";
+		Cookie[] arr = req.getCookies();
+		if(arr != null) {
+			for (Cookie c : arr) {
+				if(c.getName().equals("username")) {
+					uname = c.getValue();
+					break;
+				}
+			}
+		}
+		
+		out.printf("Hello, Voter - %s! <hr/>\n", uname);
+		
 			out.println("Your vote is registered successfully. <br/><br/>");
 			out.println("<a href='logout'>Sign Out</a>");
 		out.println("</body>");
