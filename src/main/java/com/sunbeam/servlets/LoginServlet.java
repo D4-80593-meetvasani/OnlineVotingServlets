@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sunbeam.daos.UserDao;
 import com.sunbeam.daos.UserDaoImpl;
@@ -45,6 +46,11 @@ public class LoginServlet extends HttpServlet {
 		out.println("<body>");
 		if(success) {
 			
+			// add user object into the session
+			HttpSession session = req.getSession();
+			session.setAttribute("curUser", user);
+			
+			
 			String uname = user.getFirstName() + "_" + user.getLastName();
 			Cookie c = new Cookie("username", uname);
 			c.setMaxAge(3600);
@@ -54,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			if(user.getRole().equals("voter"))
 				resp.sendRedirect("candlist"); // go to next servlet for voter
 			else // user.getRole().equals("admi")
-				resp.sendRedirect("admin"); // go to next servlet for admin
+				resp.sendRedirect("result"); // go to next servlet for admin
 		} // go to next servlet
 		else {
 			out.println("Invalid email or password. <br/><br/>");
