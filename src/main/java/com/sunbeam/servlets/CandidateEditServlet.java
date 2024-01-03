@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,15 +51,30 @@ public class CandidateEditServlet extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 	}
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// get candidate values from req param and update in db.
+		String candId = req.getParameter("id"); // from hidden form field
+		String name = req.getParameter("name"); // from input text
+		String party = req.getParameter("party"); // from input text
+		String votes = req.getParameter("votes"); // from input text (read-only)
+		
+		Candidate cand = new Candidate(Integer.parseInt(candId), name, party, Integer.parseInt(votes));
+		int cnt = 0;
+		try(CandidateDao candDao = new CandidateDaoImpl()) {
+			cnt = candDao.update(cand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+
+		// forward req to result servlet
+		RequestDispatcher rd = req.getRequestDispatcher("result");
+		rd.forward(req, resp);
+	}
+	
 }
-
-
-
-
-
-
-
-
-
 
 
