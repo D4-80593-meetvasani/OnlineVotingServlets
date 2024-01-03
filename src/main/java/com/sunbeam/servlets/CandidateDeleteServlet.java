@@ -29,6 +29,7 @@ public class CandidateDeleteServlet extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
+		req.setAttribute("message", "Candidates Deleted: " + cnt);
 		//resp.sendRedirect("result");
 		RequestDispatcher rd = req.getRequestDispatcher("result");
 		rd.forward(req, resp);

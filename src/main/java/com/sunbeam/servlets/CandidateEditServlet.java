@@ -69,6 +69,7 @@ public class CandidateEditServlet extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
+		req.setAttribute("message", "Candidates Updated: " + cnt);
 
 		// forward req to result servlet
 		RequestDispatcher rd = req.getRequestDispatcher("result");

@@ -74,6 +74,9 @@ public class ResultServlet extends HttpServlet {
 					c.getId(), c.getName(), c.getParty(), c.getVotes(), c.getId(), c.getId());
 		out.println("</table>");
 
+		String msg = (String) req.getAttribute("message");
+		if(msg != null)
+			out.println("<br/><br/>" + msg);
 		out.println("<br/><br/><a href='logout'>Sign Out</a>");
 		out.println("</form>");
 		out.println("</body>");
