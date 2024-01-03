@@ -64,10 +64,14 @@ public class ResultServlet extends HttpServlet {
 		out.println("<th>Name</th>");
 		out.println("<th>Party</th>");
 		out.println("<th>Votes</th>");
+		out.println("<th>Action</th>");
 		out.println("</thead>");
 		for (Candidate c : list)
-			out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", 
-					c.getId(), c.getName(), c.getParty(), c.getVotes());
+			out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>"
+					+ "<a href='candedit?id=%d'><img width='28' height='28' src='edit.png' alt='Edit'/></a>"
+					+ "<a href='canddel?id=%d'><img width='28' height='28' src='delete.png' alt='Delete'/></a>"
+					+ "</td></tr>\n", 
+					c.getId(), c.getName(), c.getParty(), c.getVotes(), c.getId(), c.getId());
 		out.println("</table>");
 
 		out.println("<br/><br/><a href='logout'>Sign Out</a>");
