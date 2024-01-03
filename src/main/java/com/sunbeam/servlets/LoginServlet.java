@@ -58,9 +58,9 @@ public class LoginServlet extends HttpServlet {
 
 			
 			if(user.getRole().equals("voter"))
-				resp.sendRedirect("candlist"); // go to next servlet for voter
+				resp.sendRedirect(resp.encodeRedirectURL("candlist")); // go to next servlet for voter
 			else // user.getRole().equals("admi")
-				resp.sendRedirect("result"); // go to next servlet for admin
+				resp.sendRedirect(resp.encodeRedirectURL("result")); // go to next servlet for admin
 		} // go to next servlet
 		else {
 			out.println("Invalid email or password. <br/><br/>");
