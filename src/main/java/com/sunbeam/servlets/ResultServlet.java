@@ -77,6 +77,7 @@ public class ResultServlet extends HttpServlet {
 		String msg = (String) req.getAttribute("message");
 		if(msg != null)
 			out.println("<br/><br/>" + msg);
+		out.println("<br/><a href='annoucement.html'>Announcement</a>");
 		out.println("<br/><br/><a href='logout'>Sign Out</a>");
 		out.println("</form>");
 		out.println("</body>");

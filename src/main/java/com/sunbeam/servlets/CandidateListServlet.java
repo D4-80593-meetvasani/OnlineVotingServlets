@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -51,6 +52,12 @@ public class CandidateListServlet extends HttpServlet {
 		}
 		
 		out.printf("Hello, Voter - %s! <hr/>\n", uname);	
+		
+		// if any new announcement is available, then display it.
+		ServletContext ctx = req.getServletContext();
+		String message = (String) ctx.getAttribute("announcement");
+		if(message != null)
+			out.println("Annoucement: " + message + "<br/><br/>");
 		
 		out.printf("<form method='post' action='vote'>\n");
 		
