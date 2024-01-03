@@ -79,8 +79,8 @@ public class VoteServlet extends HttpServlet {
 
 			out.println("Your vote is registered successfully. <br/><br/>");
 		}
-		String url = resp.encodeURL("logout");
-		out.printf("<a href='%s'>Sign Out</a>", url);
+		out.printf("<a href='logout'>Sign Out</a>");
+
 		out.println("</body>");
 		out.println("</html>");
 	}

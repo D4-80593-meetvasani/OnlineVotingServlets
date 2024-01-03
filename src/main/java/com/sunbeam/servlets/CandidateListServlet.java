@@ -52,8 +52,7 @@ public class CandidateListServlet extends HttpServlet {
 		
 		out.printf("Hello, Voter - %s! <hr/>\n", uname);	
 		
-		String url = resp.encodeURL("vote");
-		out.printf("<form method='post' action='%s'>\n", url);
+		out.printf("<form method='post' action='vote'>\n");
 		
 		for (Candidate c : list)
 			out.printf("<input type='radio' name='candidate' value='%s'/> %s - %s <br/>\n", 
