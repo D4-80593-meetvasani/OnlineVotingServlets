@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,6 +71,13 @@ public class RegisterServlet extends HttpServlet{
 		out.println("<title>Registered</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+
+		ServletContext app = req.getServletContext();
+		String title = app.getInitParameter("appTitle");
+		out.printf("<h1>%s</h1>\n", title);
+		
+		
 		out.println("<h1>Registered Sucessfully</h1><br/>");
 		out.println("<a href=\"index.html\" >Login</a>");
 		out.println("</body>");

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -44,6 +45,12 @@ public class ResultServlet extends HttpServlet {
 		out.println("<title>Result</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+
+		ServletContext app = req.getServletContext();
+		String title = app.getInitParameter("appTitle");
+		out.printf("<h1>%s</h1>\n", title);
+		
 		
 		String uname = "";
 		Cookie[] arr = req.getCookies();

@@ -3,6 +3,7 @@ package com.sunbeam.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -45,6 +46,13 @@ public class LogoutServlet extends HttpServlet {
 		out.println("<title>Logout</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+
+		ServletContext app = req.getServletContext();
+		String title = app.getInitParameter("appTitle");
+		out.printf("<h1>%s</h1>\n", title);
+		
+		
 		out.println("Thank you. <br/><br/>");
 		out.println("<a href='index.html'>Login Again</a>");
 		out.println("</body>");

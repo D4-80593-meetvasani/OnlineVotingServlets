@@ -40,6 +40,13 @@ public class CandidateListServlet extends HttpServlet {
 		out.println("<title>Candidates</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+
+		ServletContext app = req.getServletContext();
+		String title = app.getInitParameter("appTitle");
+		out.printf("<h1>%s</h1>\n", title);
+		
+		
 		String uname = "";
 		Cookie[] arr = req.getCookies();
 		if(arr != null) {

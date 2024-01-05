@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +42,12 @@ public class CandidateEditServlet extends HttpServlet {
 		out.println("<title>Edit Candidate</title>");
 		out.println("</head>");
 		out.println("<body>");
+		
+
+		ServletContext app = req.getServletContext();
+		String title = app.getInitParameter("appTitle");
+		out.printf("<h1>%s</h1>\n", title);
+		
 		out.println("<form method='post' action='candedit'>");
 		out.printf("<input type='hidden' name='id' value='%d' readonly><br/><br/>\n", cand.getId());
 		out.printf("Name: <input type='text' name='name' value='%s'><br/><br/>\n", cand.getName());

@@ -14,4 +14,28 @@
   	<session-timeout>30</session-timeout>
   	<tracking-mode>COOKIE</tracking-mode>
   </session-config>
+  
+    <!-- application init param i.e. app settings/config -->
+  <context-param>
+  	<param-name>appTitle</param-name>
+  	<param-value>Online Voting System</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>DB_DRIVER</param-name>
+  	<param-value>com.mysql.cj.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>DB_URL</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/voting</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>DB_USER</param-name>
+  	<param-value>vasani</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>DB_PASSWORD</param-name>
+  	<param-value>vasani</param-value>
+  </context-param>
+  
 </web-app>
