@@ -10,7 +10,7 @@ public class Dao implements AutoCloseable {
 		con = DbUtil.getConnection();
 	}
 	public void close() throws Exception {
-		if(con != null)
-			con.close();
+//		if(con != null)
+//			con.close();
 	}
 }
