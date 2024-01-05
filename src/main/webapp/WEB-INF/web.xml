@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>online_voting_Servlets</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <session-config>
-  	<session-timeout>30</session-timeout>
-  	<tracking-mode>COOKIE</tracking-mode>
-  </session-config>
-  
-    <!-- application init param i.e. app settings/config -->
-  <context-param>
-  	<param-name>appTitle</param-name>
-  	<param-value>Online Voting System</param-value>
-  </context-param>
-  
-  <context-param>
-  	<param-name>DB_DRIVER</param-name>
-  	<param-value>com.mysql.cj.jdbc.Driver</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>DB_URL</param-name>
-  	<param-value>jdbc:mysql://localhost:3306/voting</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>DB_USER</param-name>
-  	<param-value>vasani</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>DB_PASSWORD</param-name>
-  	<param-value>vasani</param-value>
-  </context-param>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>online_voting_Servlets</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<filter>
+		<filter-name>Security</filter-name>
+		<filter-class>com.sunbeam.filters.SecurityFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Security</filter-name>
+		<url-pattern>/candlist</url-pattern>
+		<url-pattern>/vote</url-pattern>
+		<url-pattern>/logout</url-pattern>
+		<url-pattern>/result</url-pattern>
+		<url-pattern>/candedit</url-pattern>
+		<url-pattern>/canddel</url-pattern>
+		<url-pattern>/announce</url-pattern>
+	</filter-mapping>
+
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+	<!-- application init param i.e. app settings/config -->
+	<context-param>
+		<param-name>appTitle</param-name>
+		<param-value>Online Voting System</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>DB_DRIVER</param-name>
+		<param-value>com.mysql.cj.jdbc.Driver</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DB_URL</param-name>
+		<param-value>jdbc:mysql://localhost:3306/voting</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DB_USER</param-name>
+		<param-value>vasani</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DB_PASSWORD</param-name>
+		<param-value>vasani</param-value>
+	</context-param>
+
 </web-app>
