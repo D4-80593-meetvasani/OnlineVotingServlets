@@ -65,6 +65,11 @@ public class ResultServlet extends HttpServlet {
 		
 		
 		out.printf("Hello, Admin - %s! <hr/>\n", uname);
+		
+		
+		Integer cnt = (Integer) app.getAttribute("userCnt");
+		out.printf("Live Users Count: %s<br/><br/>\n", cnt);
+		
 
 		out.println("<thead>");
 		out.println("<th>Id</th>");
