@@ -1,6 +1,7 @@
 package com.sunbeam.servlets;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,11 @@ public class CandidateDeleteServlet extends HttpServlet {
 		}
 		req.setAttribute("message", "Candidates Deleted: " + cnt);
 		//resp.sendRedirect("result");
-		RequestDispatcher rd = req.getRequestDispatcher("result");
+		
+//		RequestDispatcher rd = req.getRequestDispatcher("result");
+		
+		ServletContext ctx = req.getServletContext();
+		RequestDispatcher rd = ctx.getRequestDispatcher("/result");
 		rd.forward(req, resp);
 	}
 }
